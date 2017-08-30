@@ -11,6 +11,10 @@ api = Api(app)
 
 api.add_resource(AccountRegister, '/register')
 
+@app.route('/')
+def index():
+    return 'Under Constructions'
+
 if __name__ == '__main__':
     from db import db
     db.init_app(app)
