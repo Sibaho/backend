@@ -13,7 +13,7 @@ app.secret_key = 'dpay'
 app.register_blueprint(application)
 api = Api(app)
 
-api.add_resource(AccountRegister, '/register')
+api.add_resource(AccountRegister, '/daftar')
 
 if __name__ == '__main__':
     from db import db
