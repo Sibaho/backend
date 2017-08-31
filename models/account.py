@@ -11,16 +11,22 @@ class AccountModel(db.Model):
     email = db.Column(db.String(128))
     password = db.Column(db.String(128))
     pin = db.Column(db.Integer)
-    balance = db.Column(db.Float(precision=2))
+    balance = db.Column(db.Float(precision=2), default=0)
 
-    def __init__(self, phone_number, name, unique_name, email, password, pin, balance):
+    def __init__(self, phone_number, name, unique_name, email, password, pin):
         self.phone_number = phone_number
         self.name = name
         self.unique_name = unique_name
         self.email = email
         self.password = password
         self.pin = pin
-        self.balance = balance
+
+    def json(self):
+        return {'phone_number': self.phone_number,
+                'name': self.name,
+                'unique_name': self.unique_name,
+                'email': self.email,
+                'balance': self.balance}
 
     def save_to_db(self):
         db.session.add(self)

@@ -6,35 +6,30 @@ class AccountRegister(Resource):
     parser.add_argument('phone_number',
                         type=str,
                         required=True,
-                        help='This field cannot be left blank!')
+                        help='Phone number cannot be left blank!')
     parser.add_argument('name',
                         type=str,
                         required=True,
-                        help='This field cannot be left blank!')
+                        help='Name cannot be left blank!')
     parser.add_argument('unique_name',
                         type=str,
                         required=True,
-                        help='This field cannot be left blank!'
+                        help='Unique name cannot be left blank!'
                         )
     parser.add_argument('email',
                         type=str,
                         required=True,
-                        help='This field cannot be left blank!'
+                        help='Email field cannot be left blank!'
                         )
     parser.add_argument('password',
                         type=str,
                         required=True,
-                        help='This field cannot be left blank!'
+                        help='Password cannot be left blank!'
                         )
     parser.add_argument('pin',
                         type=int,
                         required=True,
-                        help='This field cannot be left blank!'
-                        )
-    parser.add_argument('balance',
-                        type=float,
-                        required=True,
-                        help='This field cannot be left blank!'
+                        help='PIN cannot be left blank!'
                         )
 
     def post(self):
