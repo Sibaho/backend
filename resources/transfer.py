@@ -6,15 +6,15 @@ class Transfer(Resource):
     parser.add_argument('phone_number_sender',
                         type=str,
                         required=True,
-                        help='Phone number cannot be left blank!')
+                        help='Phone number sender cannot be left blank!')
     parser.add_argument('phone_number_receiver',
                         type=str,
                         required=True,
-                        help='Name cannot be left blank!')
+                        help='Phone number receiver cannot be left blank!')
     parser.add_argument('amount',
                         type=float,
                         required=True,
-                        help='Unique name cannot be left blank!'
+                        help='Amount cannot be left blank!'
                         )
 
     def put(self):

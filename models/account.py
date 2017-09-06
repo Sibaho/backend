@@ -39,3 +39,7 @@ class AccountModel(db.Model):
     @classmethod
     def find_by_unique_name(cls, unique_name):
         return cls.query.filter_by(unique_name=unique_name).first()
+
+    @classmethod
+    def login(cls, email, password):
+        return cls.query.filter_by(email=email).first()
