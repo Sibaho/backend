@@ -41,5 +41,5 @@ class AccountModel(db.Model):
         return cls.query.filter_by(unique_name=unique_name).first()
 
     @classmethod
-    def login(cls, unique_name, password):
-        return cls.query.filter_by(unique_name=unique_name, password=password).first()
+    def login(cls, unique_name, phone_number, password):
+        return cls.query.filter_by(unique_name=unique_name, phone_number=phone_number, password=password).first()
