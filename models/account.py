@@ -28,7 +28,7 @@ class AccountModel(db.Model):
                 'email': self.email,
                 'balance': self.balance}
     def unique_name_json(self):
-	return{'unique_name': self.unique_name}
+        return{'unique_name': self.unique_name}
 
     def save_to_db(self):
         db.session.add(self)
