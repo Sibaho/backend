@@ -21,6 +21,7 @@ app.register_blueprint(application)
 
 api = Api(app)
 api.add_resource(AccountRegister, '/register')
+api.add_resource(AccountRegister, 'account/<string:phone_number>')
 api.add_resource(Transfer, '/transfer')
 api.add_resource(AdsList, '/adslist')
 api.add_resource(Topup, '/topup')

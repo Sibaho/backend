@@ -7,10 +7,6 @@ class Login(Resource):
                         type=str,
                         required=True,
                         help='Username cannot be left blank!')
-    parser.add_argument('phone_number',
-                        type=str,
-                        required=True,
-                        help='Phone number cannot be left blank!')
     parser.add_argument('password',
                         type=str,
                         required=True,
@@ -18,7 +14,7 @@ class Login(Resource):
 
     def post(self):
         data = Login.parser.parse_args()
-        acc = AccountModel.login(data['unique_name'], data['phone_number'], data['password'])
+        acc = AccountModel.login(data['unique_name'], data['password'])
 
         if acc:
             return {'message': 'Login success', 'account': acc.json()}

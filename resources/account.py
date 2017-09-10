@@ -42,3 +42,10 @@ class AccountRegister(Resource):
         account.save_to_db()
 
         return {'message': 'Account created successful'}, 201
+
+    def get(self, phone_number):
+	unique_name = AccountModel.find_by_phone_number(phone_number)
+        if unique_name:
+           return unique_name.unique_name_json()
+        return {'message': 'Not found'}, 404
+	

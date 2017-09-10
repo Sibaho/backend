@@ -27,6 +27,8 @@ class AccountModel(db.Model):
                 'unique_name': self.unique_name,
                 'email': self.email,
                 'balance': self.balance}
+    def unique_name_json(self):
+	return{'unique_name': self.unique_name}
 
     def save_to_db(self):
         db.session.add(self)
@@ -41,5 +43,5 @@ class AccountModel(db.Model):
         return cls.query.filter_by(unique_name=unique_name).first()
 
     @classmethod
-    def login(cls, unique_name, phone_number, password):
-        return cls.query.filter_by(unique_name=unique_name, phone_number=phone_number, password=password).first()
+    def login(cls, unique_name, password):
+        return cls.query.filter_by(unique_name=unique_name, password=password).first()
