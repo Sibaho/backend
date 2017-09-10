@@ -6,6 +6,7 @@ from resources.transfer import Transfer
 from resources.ads import AdsList
 from resources.topup import Topup
 from resources.login import Login
+from resources.getaccount import GetAccount
 
 from application import application
 
@@ -25,6 +26,7 @@ api.add_resource(Transfer, '/transfer')
 api.add_resource(AdsList, '/adslist')
 api.add_resource(Topup, '/topup')
 api.add_resource(Login, '/login')
+api.add_resource(Login, '/get_uniquename_by_phone_number/<string:phone_number>')
 
 if __name__ == '__main__':
     from db import db
