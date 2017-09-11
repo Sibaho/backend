@@ -26,7 +26,7 @@ api.add_resource(Transfer, '/transfer')
 api.add_resource(AdsList, '/adslist')
 api.add_resource(Topup, '/topup')
 api.add_resource(Login, '/login')
-api.add_resource(Login, '/get_uniquename_by_phone_number/<string:phone_number>')
+api.add_resource(GetAccount, '/get_uniquename_by_phone_number/<string:phone_number>')
 
 if __name__ == '__main__':
     from db import db
