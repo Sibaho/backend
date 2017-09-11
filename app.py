@@ -7,10 +7,10 @@ from resources.ads import AdsList
 from resources.topup import Topup
 from resources.login import Login
 from resources.getaccount import GetAccount
+from resources.notif import NotifList
+from resources.notif import Notif
 
 from application import application
-
-
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data.db'
@@ -27,6 +27,8 @@ api.add_resource(AdsList, '/adslist')
 api.add_resource(Topup, '/topup')
 api.add_resource(Login, '/login')
 api.add_resource(GetAccount, '/get_uniquename_by_phone_number/<string:phone_number>')
+api.add_resource(NotifList, '/notiflist')
+api.add_resource(Notif, '/getnotif/<string:phone_number>')
 
 if __name__ == '__main__':
     from db import db
