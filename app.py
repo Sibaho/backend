@@ -9,6 +9,8 @@ from resources.login import Login
 from resources.getaccount import GetAccount
 from resources.notif import NotifList
 from resources.notif import Notif
+from resources.history import History
+from resources.history import HistoryList
 
 from application import application
 
@@ -29,8 +31,13 @@ api.add_resource(Login, '/login')
 api.add_resource(GetAccount, '/get_uniquename_by_phone_number/<string:phone_number>')
 api.add_resource(NotifList, '/notiflist')
 api.add_resource(Notif, '/getnotif/<string:phone_number>')
+api.add_resource(History, '/create_history')
+api.add_resource(HistoryList, '/get_history/<string:phone_number>')
 
 if __name__ == '__main__':
     from db import db
+    @app.before_first_request
+    def create_tables():
+        db.create_all()
     db.init_app(app)
     app.run(debug=True)

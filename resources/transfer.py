@@ -1,6 +1,7 @@
 from flask_restful import Resource, reqparse
 from models.account import AccountModel
 from models.notif import NotifModel
+from models.history import HistoryModel
 
 class Transfer(Resource):
     parser = reqparse.RequestParser()
@@ -24,16 +25,22 @@ class Transfer(Resource):
         acc_receiver = AccountModel.find_by_phone_number(data['phone_number_receiver'])
         notif = NotifModel(data['phone_number_receiver'], "Transfer dari {} Rp {} berhasil".format\
             (data['phone_number_receiver'], data['amount']), True)
+        # name, price, qty, total, account_phonenumber
+        history_sender = HistoryModel("Transfer Rp {} to {}".format(data['amount'], data['phone_number_receiver']), data['amount'], 1, data['amount'], data['phone_number_sender'])
+        history_receiver = HistoryModel("Receive balance Rp {} from {}".format(data['amount'], data['phone_number_sender']), data['amount'],1, data['amount'], data['phone_number_receiver'])
 
         if acc_sender and acc_receiver:
             if acc_sender.balance < data['amount']:
                 return {'message': 'Your balance not enough.'}
+
 
             acc_sender.balance -= data['amount']
             acc_receiver.balance += data['amount']
             acc_sender.save_to_db()
             acc_receiver.save_to_db()
             notif.save_to_db()
+            history_receiver.save_to_db()
+            history_sender.save_to_db()
 
             return acc_sender.json()
         else:
