@@ -15,7 +15,7 @@ class HistoryModel(db.Model):
     status = db.Column(db.Integer, default=1)
     created_at = db.Column(db.Integer, nullable=False, default=get_epoch_gmt7())
 
-    account_phonenumber = db.Column(db.Integer, db.ForeignKey('accounts.phone_number'))
+    account_phonenumber = db.Column(db.String, db.ForeignKey('accounts.phone_number'))
     account = db.relationship('AccountModel', foreign_keys=[account_phonenumber])
 
     def __init__(self, name, price, qty, total, account_phonenumber):
