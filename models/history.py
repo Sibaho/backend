@@ -1,6 +1,8 @@
 import sqlite3
-import datetime
+import json
+from datetime import date, datetime, time
 from db import db
+from models import get_epoch_gmt7
 
 class HistoryModel(db.Model):
     __tablename__ = 'history'
@@ -11,7 +13,7 @@ class HistoryModel(db.Model):
     qty = db.Column(db.Integer, default=1)
     total = db.Column(db.Float(precision=2))
     status = db.Column(db.Integer, default=1)
-    created_at = db.Column(db.DateTime, default=datetime.datetime.utcnow)
+    created_at = db.Column(db.Integer, nullable=False, default=get_epoch_gmt7())
 
     account_phonenumber = db.Column(db.Integer, db.ForeignKey('accounts.phone_number'))
     account = db.relationship('AccountModel', foreign_keys=[account_phonenumber])
@@ -24,7 +26,7 @@ class HistoryModel(db.Model):
         self.account_phonenumber = account_phonenumber
 
     def json(self):
-        return{'id': self.id, 'name': self.name, 'price': self.price, 'qty': self.qty, 'total': self.total, 'status': self.status, 'phone_number': self.account_phonenumber}
+        return{'id': self.id, 'name': self.name, 'price': self.price, 'qty': self.qty, 'total': self.total, 'status': self.status, 'phone_number': self.account_phonenumber, 'created_at': self.created_at}
 
     def save_to_db(self):
         db.session.add(self)
