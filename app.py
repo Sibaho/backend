@@ -2,6 +2,7 @@ from flask import Flask
 from flask_restful import Api
 
 from resources.account import AccountRegister
+from resources.account import AccountList
 from resources.transfer import Transfer
 from resources.ads import AdsList
 from resources.topup import Topup
@@ -33,8 +34,14 @@ api.add_resource(NotifList, '/notiflist')
 api.add_resource(Notif, '/getnotif/<string:phone_number>')
 api.add_resource(History, '/create_history')
 api.add_resource(HistoryList, '/get_history/<string:phone_number>')
+api.add_resource(AccountList, '/acclist')
 
 if __name__ == '__main__':
     from db import db
+
+
+    @app.before_first_request
+    def create_tables():
+        db.create_all()
     db.init_app(app)
     app.run(debug=True)

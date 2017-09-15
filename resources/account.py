@@ -48,3 +48,7 @@ class AccountRegister(Resource):
         if unique_name:
             return unique_name.unique_name_json()
         return {'message': 'Not found'}, 404
+
+class AccountList(Resource):
+    def get(self):
+        return {'acc': [acc.json() for acc in AccountModel.query.all()]}
