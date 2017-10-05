@@ -36,4 +36,4 @@ class History(Resource):
 
 class HistoryList(Resource):
     def get(self, phone_number):
-        return {'history': [history.json() for history in HistoryModel.find_by_phone_number(phone_number)]}
+        return {'histories': [history.json() for history in HistoryModel.find_by_phone_number(phone_number)]}

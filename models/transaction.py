@@ -23,4 +23,6 @@ class TransactionModel(db.Model):
 
     @classmethod
     def notif_true(cls, phone_number):
+        if '+62' in phone_number:
+            phone_number.replace('+62', '0')
         return cls.query.filter_by(phone_number=phone_number, notif_status=True).first()

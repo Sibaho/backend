@@ -1,9 +1,7 @@
-from flask_sqlalchemy import SQLAlchemy
 from pytz import timezone
 import arrow
 
 
-db = SQLAlchemy()
 JKT = 'Asia/Jakarta'
 JKTTZ = timezone(JKT)
 

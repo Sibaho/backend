@@ -37,7 +37,10 @@ class AccountModel(db.Model):
 
     @classmethod
     def find_by_phone_number(cls, phone_number):
-        return cls.query.filter_by(phone_number=phone_number).first()
+        _phone_number = phone_number
+        if '+62' in phone_number:
+            _phone_number = phone_number.replace('+62','0')
+        return cls.query.filter_by(phone_number=_phone_number).first()
 
     @classmethod
     def find_by_unique_name(cls, unique_name):

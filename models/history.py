@@ -34,4 +34,6 @@ class HistoryModel(db.Model):
 
     @classmethod
     def find_by_phone_number(cls, phone_number):
+        if '+62' in phone_number:
+            phone_number = phone_number.replace('+62', '0')
         return cls.query.filter_by(account_phonenumber=phone_number).all()
