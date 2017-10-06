@@ -14,7 +14,10 @@ class NotifModel(db.Model):
         self.message = message
         self.notif_status = notif_status
 
-    def json(self):
+    def json(self, balance):
+        return{'id': self.id, 'phone_number': self.phone_number, 'message': self.message, 'notif_status': self.notif_status, 'balance': balance}
+
+    def json2(self):
         return{'id': self.id, 'phone_number': self.phone_number, 'message': self.message, 'notif_status': self.notif_status}
 
     def save_to_db(self):
