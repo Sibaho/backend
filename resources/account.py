@@ -1,5 +1,6 @@
 from flask_restful import Resource, reqparse
 from models.account import AccountModel
+from models.notif import NotifModel
 
 class AccountRegister(Resource):
     parser = reqparse.RequestParser()
@@ -37,9 +38,11 @@ class AccountRegister(Resource):
 
         if (AccountModel.find_by_phone_number(data['phone_number']) or AccountModel.find_by_unique_name(data['unique_name'])):
             return {'message': 'Account already exists'}, 400
-
+        # phone_number, message, notif_status
+        notif = NotifModel(data['phone_number'], "", False)
         account = AccountModel(**data)
         account.save_to_db()
+        notif.save_to_db()
 
         return {'message': 'Account created successful'}, 201
 

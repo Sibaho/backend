@@ -9,7 +9,7 @@ class Notif(Resource):
             if data.notif_status:
                 data.notif_status = False
                 data.save_to_db()
-
+                data.notif_status = True
                 return data.json()
         except(AttributeError, TypeError, RuntimeError, NameError):
             pass

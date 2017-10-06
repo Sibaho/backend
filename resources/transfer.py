@@ -23,9 +23,17 @@ class Transfer(Resource):
         data = Transfer.parser.parse_args()
         acc_sender = AccountModel.find_by_phone_number(data['phone_number_sender'])
         acc_receiver = AccountModel.find_by_phone_number(data['phone_number_receiver'])
-        notif = NotifModel(data['phone_number_receiver'], "Transfer dari {} Rp {} berhasil".format\
-            (data['phone_number_receiver'], data['amount']), True)
-        # name, price, qty, total, account_phonenumber
+        notif = NotifModel.notif_true(data['phone_number_receiver'])
+        if acc_receiver:
+            if notif:
+                notif.message = "Receive balance Rp {} from {}".format(data['amount'], data['phone_number_sender'])
+                notif.notif_status = True
+                notif.save_to_db()
+            else:
+                message = "Receive balance Rp {} from {}".format(data['amount'], data['phone_number_sender'])
+                new_notif = NotifModel(data['phone_number_receiver'], message, True)
+                new_notif.save_to_db()
+
         history_sender = HistoryModel("Transfer Rp {} to {}".format(data['amount'], data['phone_number_receiver']), data['amount'], 1, data['amount'], data['phone_number_sender'])
         history_receiver = HistoryModel("Receive balance Rp {} from {}".format(data['amount'], data['phone_number_sender']), data['amount'],1, data['amount'], data['phone_number_receiver'])
 
@@ -36,9 +44,9 @@ class Transfer(Resource):
 
             acc_sender.balance -= data['amount']
             acc_receiver.balance += data['amount']
+
             acc_sender.save_to_db()
             acc_receiver.save_to_db()
-            notif.save_to_db()
             history_receiver.save_to_db()
             history_sender.save_to_db()
 
