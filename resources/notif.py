@@ -6,11 +6,15 @@ class Notif(Resource):
     def get(self, phone_number):
         data = NotifModel.notif_true(phone_number)
         try:
-            if data.notif_status:
-                data.notif_status = False
-                data.save_to_db()
-                data.notif_status = True
-                return data.json()
+            if data:
+                if data.notif_status:
+                    data.notif_status = False
+                    data.save_to_db()
+                    data.notif_status = True
+                    return data.json()
+                else:
+                    return data.json()
+
         except(AttributeError, TypeError, RuntimeError, NameError):
             pass
 
