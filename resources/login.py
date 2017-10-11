@@ -17,6 +17,6 @@ class Login(Resource):
         acc = AccountModel.login(data['unique_name'], data['password'])
 
         if acc:
-            return {'message': 'Login success', 'account': acc.json()}
+            return {'message': 'Login success', 'account': acc.json()}, 200
         else:
-            return{'message': 'Login failed'}
+            return{'message': 'Login failed'}, 400

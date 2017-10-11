@@ -21,6 +21,13 @@ class AccountModel(db.Model):
         self.password = password
         self.pin = pin
 
+    def __init__(self, phone_number, name, unique_name, password, balance):
+        self.phone_number = phone_number
+        self.name = name
+        self.unique_name = unique_name
+        self.password = password
+        self.balance = balance
+
     def json(self):
         return {'phone_number': self.phone_number,
                 'name': self.name,

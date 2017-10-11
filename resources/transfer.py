@@ -2,6 +2,8 @@ from flask_restful import Resource, reqparse
 from models.account import AccountModel
 from models.notif import NotifModel
 from models.history import HistoryModel
+import random
+import string
 
 class Transfer(Resource):
     parser = reqparse.RequestParser()
@@ -50,6 +52,13 @@ class Transfer(Resource):
             history_receiver.save_to_db()
             history_sender.save_to_db()
 
-            return acc_sender.json()
+            return acc_sender.json(), 200
         else:
-            return{'message': 'phone number not exist'}
+            # phone_number, name, unique_name, password, balance
+            password = self.generate_random_string()
+            new_acc = AccountModel(data['phone_number_receiver'], data['phone_number_receiver'], data['phone_number_receiver'], password, data['amount'])
+            new_acc.save_to_db()
+            return {'message': 'account does not exist, so system create it automatically', 'account_receiver': new_acc.json()}, 201
+
+    def generate_random_string(self, size=6, chars=string.ascii_uppercase + string.digits):
+        return ''.join(random.choice(chars) for _ in range(size))

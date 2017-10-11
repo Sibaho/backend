@@ -13,9 +13,9 @@ class Notif(Resource):
                     data.notif_status = False
                     data.save_to_db()
                     data.notif_status = True
-                    return data.json(acc.balance)
+                    return data.json(acc.balance), 200
                 else:
-                    return data.json(acc.balance)
+                    return data.json(acc.balance), 200
 
         except(AttributeError, TypeError, RuntimeError, NameError):
             pass
@@ -23,4 +23,4 @@ class Notif(Resource):
 
 class NotifList(Resource):
     def get(self):
-        return {'notif': [ads.json2() for ads in NotifModel.query.all()]}
+        return {'notif': [ads.json2() for ads in NotifModel.query.all()]}, 200

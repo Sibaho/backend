@@ -30,10 +30,10 @@ class History(Resource):
         if history:
             history.status = 1
             history.save_to_db()
-            return {'message': 'Transaction success', 'history': history.json()}
+            return {'message': 'Transaction success', 'history': history.json()}, 201
         else:
-            return{'message': 'Transaction failed'}
+            return{'message': 'Transaction failed'}, 400
 
 class HistoryList(Resource):
     def get(self, phone_number):
-        return {'histories': [history.json() for history in HistoryModel.find_by_phone_number(phone_number)]}
+        return {'histories': [history.json() for history in HistoryModel.find_by_phone_number(phone_number)]}, 201

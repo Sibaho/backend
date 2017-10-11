@@ -21,6 +21,6 @@ class Topup(Resource):
             acc.balance += data['amount']
             acc.save_to_db()
 
-            return acc.json()
+            return acc.json(), 200
         else:
-            return{'message': 'phone number not exist'}
+            return{'message': 'phone number not exist'}, 400
