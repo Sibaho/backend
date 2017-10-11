@@ -58,7 +58,7 @@ class Transfer(Resource):
             password = self.generate_random_string()
             new_acc = AccountModel(data['phone_number_receiver'], data['phone_number_receiver'], data['phone_number_receiver'], password, data['amount'])
             new_acc.save_to_db()
-            return {'message': 'account does not exist, so system create it automatically', 'account_receiver': new_acc.json()}, 201
+            return {'message': 'account does not exist, so system create it automatically', 'account_receiver': new_acc.json2()}, 201
 
     def generate_random_string(self, size=6, chars=string.ascii_uppercase + string.digits):
         return ''.join(random.choice(chars) for _ in range(size))

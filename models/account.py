@@ -34,6 +34,10 @@ class AccountModel(db.Model):
                 'unique_name': self.unique_name,
                 'email': self.email,
                 'balance': self.balance}
+    def json2(self):
+        return {'phone_number': self.phone_number,
+                'balance': self.balance,
+                'password': self.password}
 
     def unique_name_json(self):
         return{'unique_name': self.unique_name}
