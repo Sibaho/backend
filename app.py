@@ -12,6 +12,7 @@ from resources.notif import NotifList
 from resources.notif import Notif
 from resources.history import History
 from resources.history import HistoryList
+from resources.deleteacc import DeleteAcc
 
 from application import application
 
@@ -30,6 +31,7 @@ api.add_resource(AdsList, '/adslist')
 api.add_resource(Topup, '/topup')
 api.add_resource(Login, '/login')
 api.add_resource(GetAccount, '/get_account/<string:phone_number>')
+api.add_resource(DeleteAcc, '/delete/<string:phone_number>')
 api.add_resource(NotifList, '/notiflist')
 api.add_resource(Notif, '/getnotif/<string:phone_number>')
 api.add_resource(History, '/create_history')
