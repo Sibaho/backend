@@ -11,7 +11,7 @@ class AccountModel(db.Model):
     email = db.Column(db.String(128))
     password = db.Column(db.String(128))
     pin = db.Column(db.Integer)
-    balance = db.Column(db.Float(precision=2), default=0)
+    balance = db.Column(db.Float(precision=2), default=50000)
 
     def __init__(self, phone_number, name, unique_name, email, password, pin):
         self.phone_number = phone_number
