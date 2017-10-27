@@ -60,6 +60,10 @@ class Transfer(Resource):
             new_acc = AccountModel(data['phone_number_receiver'], "", data['phone_number_receiver'], "", password, "")
             new_acc.save_to_db()
             if(new_acc):
+
+                if acc_sender.balance < data['amount']:
+                    return {'message': 'Your balance not enough.'}
+                
                 new_acc.balance = data['amount']
                 acc_sender.balance -= data['amount']
 
