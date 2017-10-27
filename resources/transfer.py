@@ -53,12 +53,19 @@ class Transfer(Resource):
             history_sender.save_to_db()
 
             return acc_sender.json(), 200
-        else:
+        elif acc_sender:
             # phone_number, name, unique_name, password, balance
+            # def __init__(self, phone_number, name, unique_name, email, password, pin):
             password = self.generate_random_string()
-            new_acc = AccountModel(data['phone_number_receiver'], data['phone_number_receiver'], data['phone_number_receiver'], password, data['amount'])
+            new_acc = AccountModel(data['phone_number_receiver'], "", data['phone_number_receiver'], "", password, "")
             new_acc.save_to_db()
+            if(new_acc):
+                new_acc.balance = data['amount']
+                acc_sender.balance -= data['amount']
+
             return {'message': 'account does not exist, so system create it automatically', 'your_account': acc_sender.json(), 'account_receiver': new_acc.json2()}, 201
+        else:
+            return {'message': 'account not found'}
 
     def generate_random_string(self, size=6, chars=string.ascii_uppercase + string.digits):
         return ''.join(random.choice(chars) for _ in range(size))

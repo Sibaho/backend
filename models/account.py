@@ -6,12 +6,12 @@ class AccountModel(db.Model):
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     phone_number = db.Column(db.String(16), unique=True)
-    name = db.Column(db.String(64), nullable=False)
+    name = db.Column(db.String(64), nullable=True)
     unique_name = db.Column(db.String(64), unique=True)
     email = db.Column(db.String(128))
     password = db.Column(db.String(128))
     pin = db.Column(db.Integer)
-    balance = db.Column(db.Float(precision=2), default=50000)
+    balance = db.Column(db.Float(precision=2), default=50000.00)
 
     def __init__(self, phone_number, name, unique_name, email, password, pin):
         self.phone_number = phone_number
@@ -20,13 +20,6 @@ class AccountModel(db.Model):
         self.email = email
         self.password = password
         self.pin = pin
-
-    def __init__(self, phone_number, name, unique_name, password, balance):
-        self.phone_number = phone_number
-        self.name = name
-        self.unique_name = unique_name
-        self.password = password
-        self.balance = balance
 
     def json(self):
         return {'phone_number': self.phone_number,
