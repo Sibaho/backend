@@ -66,8 +66,10 @@ class Transfer(Resource):
 
                 new_acc.balance = data['amount']
                 acc_sender.balance -= data['amount']
+                new_acc.save_to_db()
+                acc_sender.save_to_db()
 
-            return {'message': 'account does not exist, so system create it automatically', 'your_account': acc_sender.json(), 'account_receiver': new_acc.json2()}, 201
+            return {'message': 'System create receiver account automatically due to receiver account does not exist.', 'your_account': acc_sender.json(), 'account_receiver': new_acc.json2()}, 201
         else:
             return {'message': 'account not found'}
 
