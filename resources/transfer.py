@@ -57,13 +57,13 @@ class Transfer(Resource):
             # phone_number, name, unique_name, password, balance
             # def __init__(self, phone_number, name, unique_name, email, password, pin):
             password = self.generate_random_string()
-            new_acc = AccountModel(data['phone_number_receiver'], "", data['phone_number_receiver'], "", password, "")
+            new_acc = AccountModel(data['phone_number_receiver'], data['phone_number_receiver'], data['phone_number_receiver'], "", password, data['phone_number_receiver'])
             new_acc.save_to_db()
             if(new_acc):
 
                 if acc_sender.balance < data['amount']:
                     return {'message': 'Your balance not enough.'}
-                
+
                 new_acc.balance = data['amount']
                 acc_sender.balance -= data['amount']
 
