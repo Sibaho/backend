@@ -13,6 +13,7 @@ from resources.notif import Notif
 from resources.history import History
 from resources.history import HistoryList
 from resources.deleteacc import DeleteAcc
+from resources.reset_password import ResetPassword
 
 from application import application
 
@@ -37,6 +38,7 @@ api.add_resource(Notif, '/getnotif/<string:phone_number>')
 api.add_resource(History, '/create_history')
 api.add_resource(HistoryList, '/get_history/<string:phone_number>')
 api.add_resource(AccountList, '/acclist')
+api.add_resource(ResetPassword, '/reset_password')
 
 if __name__ == '__main__':
     from db import db
