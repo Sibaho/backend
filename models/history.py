@@ -1,6 +1,7 @@
 import sqlite3
 import json
 from datetime import date, datetime, time
+from sqlalchemy import desc
 from db import db
 from models import get_epoch_gmt7
 
@@ -36,4 +37,4 @@ class HistoryModel(db.Model):
     def find_by_phone_number(cls, phone_number):
         if '+62' in phone_number:
             phone_number = phone_number.replace('+62', '0')
-        return cls.query.filter_by(account_phonenumber=phone_number).all()
+        return cls.query.filter_by(account_phonenumber=phone_number).order_by(desc('history.id'))
